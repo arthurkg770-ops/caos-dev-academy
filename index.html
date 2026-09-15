@@ -1892,6 +1892,56 @@ html,body{overflow-x:hidden}
  .detail-grid{grid-template-columns:1fr}
 }
 
+/* ===== FINAL CARD DIMENSION FIX — ACADEMY / PROJECTS ===== */
+.courses-grid,.course-roadmap{
+  display:grid !important;
+  grid-template-columns:repeat(4,minmax(250px,1fr)) !important;
+  gap:18px !important;
+  align-items:start !important;
+  justify-content:start !important;
+}
+.academy-card{
+  width:100% !important;
+  max-width:360px !important;
+  min-width:0 !important;
+  min-height:0 !important;
+  height:auto !important;
+  align-self:start !important;
+  justify-self:start !important;
+  box-sizing:border-box !important;
+}
+.academy-topics{flex:0 0 auto !important}
+.project-grid{
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(280px,1fr)) !important;
+  gap:18px !important;
+  align-items:start !important;
+  justify-content:start !important;
+}
+.project-card{
+  width:100% !important;
+  max-width:430px !important;
+  min-width:0 !important;
+  height:auto !important;
+  align-self:start !important;
+  justify-self:start !important;
+  box-sizing:border-box !important;
+}
+.project-checklist{flex:0 0 auto !important}
+@media (max-width:1280px){
+  .courses-grid,.course-roadmap{grid-template-columns:repeat(3,minmax(250px,1fr)) !important}
+  .project-grid{grid-template-columns:repeat(3,minmax(260px,1fr)) !important}
+}
+@media (max-width:980px){
+  .courses-grid,.course-roadmap{grid-template-columns:repeat(2,minmax(250px,1fr)) !important}
+  .project-grid{grid-template-columns:repeat(2,minmax(260px,1fr)) !important}
+  .academy-card,.project-card{max-width:none !important}
+}
+@media (max-width:620px){
+  .courses-grid,.course-roadmap,.project-grid{grid-template-columns:minmax(0,1fr) !important}
+  .academy-card,.project-card{width:100% !important;max-width:none !important}
+}
+
 </style>
 </head>
 
