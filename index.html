@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -1145,13 +1144,6 @@ a {
     justify-content: space-between;
 }
 
-.challenge-xp {
-    color: var(--yellow);
-
-    font-size: 11px;
-
-    font-weight: 900;
-}
 
 /* =========================================================
    ACHIEVEMENTS
@@ -1777,6 +1769,53 @@ a {
     color: var(--muted);
 }
 
+
+/* =========================================================
+   V2 — LEARNING-FIRST REDESIGN
+========================================================= */
+.header-progress span { color:#6e6e75; font-size:9px; display:block; letter-spacing:1px; }
+.header-progress strong { color:var(--red3); font-size:17px; }
+.player-progress { align-self:center; }
+.player-progress > small { display:block; margin-top:8px; text-align:right; color:#777; font-size:10px; }
+.next-step-card { align-items:center; }
+.next-step-card .btn-primary { margin-left:auto; }
+.progress-summary-grid { margin-top:18px; display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+.progress-mini-card { padding:20px; border:1px solid var(--border); background:var(--panel); border-radius:15px; }
+.progress-mini-card span,.progress-mini-card small { display:block; color:#777; font-size:9px; letter-spacing:1.4px; }
+.progress-mini-card strong { display:block; margin:7px 0 3px; font-size:25px; }
+.progress-section-title { margin-top:38px; }
+.progress-course { padding:20px; border:1px solid var(--border); background:var(--panel); border-radius:15px; margin-bottom:12px; }
+.progress-course-head { display:flex; justify-content:space-between; align-items:center; gap:15px; }
+.progress-course-head span { color:var(--red3); font-weight:800; }
+.progress-course p { margin-top:8px; color:#777; font-size:11px; }
+.challenge-toolbar { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; grid-column:1/-1; }
+.challenge-results { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; grid-column:1/-1; }
+.filter-chip { border:1px solid var(--border); background:#101012; color:#888; padding:9px 13px; border-radius:999px; cursor:pointer; font-size:11px; }
+.filter-chip:hover,.filter-chip.active { color:white; border-color:#63242b; background:#1a0f11; }
+.challenge-status { color:#777; font-size:10px; text-transform:uppercase; letter-spacing:1px; }
+.challenge-status.done { color:var(--green); }
+.project-grid { display:grid; grid-template-columns:minmax(0,760px); gap:18px; }
+.project-card { padding:26px; border:1px solid #332024; background:linear-gradient(145deg,#151114,#0d0d0e); border-radius:18px; box-shadow:var(--shadow); }
+.project-card-top { display:flex; justify-content:space-between; color:#777; font-size:10px; text-transform:uppercase; letter-spacing:1px; }
+.project-tag { color:var(--red3); }
+.project-card h2 { margin-top:12px; font-size:28px; }
+.project-card > p { margin-top:8px; color:#999; line-height:1.7; font-size:13px; }
+.project-progress { margin-top:22px; }
+.project-checklist { margin-top:22px; display:grid; gap:9px; }
+.project-checklist label { display:flex; gap:10px; align-items:center; padding:13px; border:1px solid var(--border); border-radius:10px; background:#101012; color:#aaa; cursor:pointer; }
+.project-checklist input { accent-color:var(--red2); }
+.activity-list { display:grid; gap:8px; }
+.activity-item { display:flex; gap:12px; align-items:flex-start; padding:14px 16px; border:1px solid var(--border); background:var(--panel); border-radius:12px; }
+.activity-dot { width:7px; height:7px; border-radius:50%; background:var(--red3); margin-top:6px; flex:0 0 auto; }
+.activity-item strong { display:block; font-size:12px; }
+.activity-item small { display:block; color:#666; margin-top:4px; font-size:10px; }
+.empty-state { padding:25px; border:1px dashed #29292d; border-radius:12px; color:#888; }
+.empty-state strong { color:#ddd; }
+.empty-state p { margin-top:5px; font-size:11px; }
+.lesson-review { width:100%; margin-top:9px; }
+@media (max-width:900px){ .stats-grid,.progress-summary-grid{grid-template-columns:repeat(2,1fr)} .challenge-results{grid-template-columns:1fr 1fr} }
+@media (max-width:650px){ .stats-grid,.progress-summary-grid,.challenge-results{grid-template-columns:1fr} .player-card{grid-template-columns:1fr}.topbar-user{gap:10px}.user-level{padding-left:10px}.page-container{padding:25px 18px}.next-step-card{align-items:flex-start;flex-wrap:wrap}.next-step-card .btn-primary{width:100%;margin-left:0}.project-grid{grid-template-columns:1fr} }
+
 </style>
 </head>
 
@@ -1839,20 +1878,13 @@ a {
 
         <button
             class="nav-item"
-            data-page="achievements"
-        >
-            <span>◆</span>
-            Conquistas
-        </button>
-
-
-        <button
-            class="nav-item"
             data-page="progress"
         >
             <span>◈</span>
             Progresso
         </button>
+
+        <button class="nav-item" data-page="projects"><span>⌁</span>Projetos</button>
 
 
         <button
@@ -1924,32 +1956,8 @@ a {
 
 
     <div class="topbar-user">
-
-        <div class="user-xp">
-
-            <span>
-                XP
-            </span>
-
-            <strong id="headerXP">
-                0
-            </strong>
-
-        </div>
-
-
-        <div class="user-level">
-
-            <small>
-                NÍVEL
-            </small>
-
-            <strong id="headerLevel">
-                1
-            </strong>
-
-        </div>
-
+        <div class="header-progress"><span>PROGRESSO</span><strong id="headerProgress">0%</strong></div>
+        <div class="user-level"><small>ESTUDO</small><strong id="headerLessons">0/20</strong></div>
     </div>
 
 </header>
@@ -2014,41 +2022,10 @@ a {
     </div>
 
 
-    <div class="player-level">
-
-        <div class="level-top">
-
-            <span>
-                Nível
-                <strong id="dashboardLevel">
-                    1
-                </strong>
-            </span>
-
-            <span>
-                <strong id="dashboardXP">
-                    0
-                </strong>
-                XP
-            </span>
-
-        </div>
-
-
-        <div class="xp-bar">
-
-            <div
-                class="xp-fill"
-                id="xpFill"
-            ></div>
-
-        </div>
-
-
-        <small id="xpProgressText">
-            0 / 100 XP
-        </small>
-
+    <div class="player-progress">
+        <div class="level-top"><span>Progresso das aulas</span><strong id="dashboardProgress">0%</strong></div>
+        <div class="xp-bar"><div class="xp-fill" id="progressFill"></div></div>
+        <small id="progressProgressText">0 de 20 aulas concluídas</small>
     </div>
 
 </div>
@@ -2100,44 +2077,14 @@ a {
 
 
 <div class="stat-card">
-
-    <div class="stat-icon">
-        ◆
-    </div>
-
-    <div>
-
-        <span>
-            CONQUISTAS
-        </span>
-
-        <strong id="achievementsUnlocked">
-            0
-        </strong>
-
-    </div>
-
+    <div class="stat-icon">◉</div>
+    <div><span>PROJETOS</span><strong id="projectsCompleted">0</strong></div>
 </div>
 
 
 <div class="stat-card">
-
-    <div class="stat-icon">
-        🔥
-    </div>
-
-    <div>
-
-        <span>
-            STREAK
-        </span>
-
-        <strong id="currentStreak">
-            0
-        </strong>
-
-    </div>
-
+    <div class="stat-icon">↻</div>
+    <div><span>PARA REVISAR</span><strong id="reviewLessons">0</strong></div>
 </div>
 
 
@@ -2179,7 +2126,7 @@ a {
     <div class="continue-info">
 
         <span>
-            PYTHON — NÍVEL 1
+            PYTHON — FUNDAMENTOS
         </span>
 
         <h3>
@@ -2203,54 +2150,12 @@ a {
 </div>
 
 
-<div class="section-title">
-
-    <div>
-
-        <span class="eyebrow">
-            MISSÃO DO DIA
-        </span>
-
-        <h2>
-            Seu objetivo de hoje
-        </h2>
-
-    </div>
-
+<div class="section-title"><div><span class="eyebrow">PRÓXIMO PASSO</span><h2>O que estudar agora</h2></div></div>
+<div class="daily-mission next-step-card">
+    <div class="mission-icon">→</div>
+    <div class="mission-info"><span>RECOMENDAÇÃO</span><h3 id="nextStepTitle">Comece pela primeira aula</h3><p id="nextStepText">Avance pela trilha de Python e pratique cada conceito.</p></div>
+    <button class="btn-primary" id="nextStepButton">Abrir</button>
 </div>
-
-
-<div class="daily-mission">
-
-    <div class="mission-icon">
-        ⚡
-    </div>
-
-
-    <div class="mission-info">
-
-        <span>
-            MISSÃO
-        </span>
-
-        <h3>
-            Complete uma aula
-        </h3>
-
-        <p>
-            Continue estudando para ganhar XP.
-        </p>
-
-    </div>
-
-
-    <div class="mission-reward">
-        +50 XP
-    </div>
-
-</div>
-
-
 </section>
 
 
@@ -2274,7 +2179,7 @@ a {
     </h1>
 
     <p>
-        Domine tecnologia uma etapa de cada vez.
+        Aprenda por trilhas, aulas e prática guiada.
     </p>
 
 </div>
@@ -2301,7 +2206,7 @@ a {
 <div class="page-heading">
 
     <span class="eyebrow">
-        ARENA
+        PRÁTICA
     </span>
 
     <h1>
@@ -2309,7 +2214,7 @@ a {
     </h1>
 
     <p>
-        Prove que você realmente aprendeu.
+        Exercite lógica, código e resolução de problemas.
     </p>
 
 </div>
@@ -2318,41 +2223,6 @@ a {
 <div
     class="challenges-grid"
     id="challengesContainer"
-></div>
-
-
-</section>
-
-
-<!-- =====================================================
-     ACHIEVEMENTS
-===================================================== -->
-
-<section
-    class="page"
-    id="page-achievements"
->
-
-<div class="page-heading">
-
-    <span class="eyebrow">
-        HALL DA FAMA
-    </span>
-
-    <h1>
-        Conquistas
-    </h1>
-
-    <p>
-        Cada conquista representa uma etapa da sua evolução.
-    </p>
-
-</div>
-
-
-<div
-    class="achievements-grid"
-    id="achievementsContainer"
 ></div>
 
 
@@ -2411,14 +2281,28 @@ a {
 </div>
 
 
-<div
-    class="progress-courses"
-    id="progressCourses"
-></div>
+<div class="progress-summary-grid">
+    <div class="progress-mini-card"><span>AULAS</span><strong id="progressLessonCount">0/20</strong><small>concluídas</small></div>
+    <div class="progress-mini-card"><span>DESAFIOS</span><strong id="progressChallengeCount">0/6</strong><small>concluídos</small></div>
+    <div class="progress-mini-card"><span>PROJETOS</span><strong id="progressProjectCount">0/1</strong><small>em desenvolvimento</small></div>
+    <div class="progress-mini-card"><span>REVISÃO</span><strong id="progressReviewCount">0</strong><small>itens marcados</small></div>
+</div>
+<div class="section-title progress-section-title"><div><span class="eyebrow">POR TECNOLOGIA</span><h2>Conhecimento por trilha</h2></div></div>
+<div class="progress-courses" id="progressCourses"></div>
+<div class="section-title progress-section-title"><div><span class="eyebrow">ATIVIDADE</span><h2>Últimas ações</h2></div></div>
+<div class="activity-list" id="activityList"></div>
 
 
 </section>
 
+
+<!-- =====================================================
+     PROJECTS
+===================================================== -->
+<section class="page" id="page-projects">
+<div class="page-heading"><span class="eyebrow">PRÁTICA</span><h1>Projetos</h1><p>Transforme o que aprendeu em projetos reais.</p></div>
+<div class="project-grid" id="projectsContainer"></div>
+</section>
 
 <!-- =====================================================
      SETTINGS
@@ -2440,7 +2324,7 @@ a {
     </h1>
 
     <p>
-        Controle sua Academy.
+        Personalize a experiência e gerencie seus dados.
     </p>
 
 </div>
@@ -2820,7 +2704,6 @@ const lessons = [
     {
         id: 1,
         course: "python",
-        level: "NÍVEL 1",
         title: "O que é programação?",
         description:
             "Entenda o que significa programar e como computadores executam instruções.",
@@ -2849,13 +2732,12 @@ const lessons = [
             Ele começa entendendo o problema.
             </div>
         `,
-        xp: 40
+
     },
 
     {
         id: 2,
         course: "python",
-        level: "NÍVEL 1",
         title: "print()",
         description:
             "Aprenda a mostrar informações na tela.",
@@ -2882,13 +2764,12 @@ print("Estou aprendendo Python!")
             pense no print().
             </div>
         `,
-        xp: 40
+
     },
 
     {
         id: 3,
         course: "python",
-        level: "NÍVEL 1",
         title: "Variáveis",
         description:
             "Aprenda a guardar informações dentro do programa.",
@@ -2915,13 +2796,12 @@ print(idade)
             💡 Pense em uma variável como uma caixinha com um nome.
             </div>
         `,
-        xp: 40
+
     },
 
     {
         id: 4,
         course: "python",
-        level: "NÍVEL 1",
         title: "input()",
         description:
             "Aprenda a receber informações do usuário.",
@@ -2943,13 +2823,12 @@ print("Olá", nome)
             Depois guarda a resposta.
             </p>
         `,
-        xp: 40
+
     },
 
     {
         id: 5,
         course: "python",
-        level: "NÍVEL 1",
         title: "Tipos de dados",
         description:
             "Conheça strings, inteiros, floats e booleanos.",
@@ -2970,13 +2849,12 @@ jogando = True
             Booleanos representam verdadeiro ou falso.
             </p>
         `,
-        xp: 40
+
     },
 
     {
         id: 6,
         course: "python",
-        level: "NÍVEL 1",
         title: "if e else",
         description:
             "Faça o programa tomar decisões.",
@@ -2997,13 +2875,12 @@ else:
             O else acontece quando a condição não é verdadeira.
             </p>
         `,
-        xp: 40
+
     },
 
     {
         id: 7,
         course: "python",
-        level: "NÍVEL 1",
         title: "Operadores",
         description:
             "Aprenda a comparar e trabalhar com valores.",
@@ -3027,13 +2904,12 @@ else:
             Esses operadores permitem realizar cálculos e comparações.
             </p>
         `,
-        xp: 40
+
     },
 
     {
         id: 8,
         course: "python",
-        level: "NÍVEL 1",
         title: "while",
         description:
             "Faça um código repetir enquanto uma condição for verdadeira.",
@@ -3052,13 +2928,12 @@ while contador <= 5:
             O while repete o bloco enquanto sua condição for verdadeira.
             </p>
         `,
-        xp: 40
+
     },
 
     {
         id: 9,
         course: "python",
-        level: "NÍVEL 1",
         title: "for",
         description:
             "Aprenda outro tipo importante de repetição.",
@@ -3075,13 +2950,12 @@ for numero in range(5):
             uma sequência ou repetir uma quantidade determinada de vezes.
             </p>
         `,
-        xp: 40
+
     },
 
     {
         id: 10,
         course: "python",
-        level: "NÍVEL 1",
         title: "Listas",
         description:
             "Guarde vários valores em uma única estrutura.",
@@ -3098,13 +2972,12 @@ print(jogadores[0])
             Listas permitem armazenar vários elementos.
             </p>
         `,
-        xp: 40
+
     },
 
     {
         id: 11,
         course: "python",
-        level: "NÍVEL 1",
         title: "Funções",
         description:
             "Aprenda a criar blocos reutilizáveis.",
@@ -3122,13 +2995,12 @@ falar()
             Funções ajudam a organizar e reutilizar código.
             </p>
         `,
-        xp: 40
+
     },
 
     {
         id: 12,
         course: "python",
-        level: "NÍVEL 1",
         title: "Parâmetros",
         description:
             "Passe informações para suas funções.",
@@ -3146,13 +3018,12 @@ falar("Arthur")
             O parâmetro permite que a função receba informações.
             </p>
         `,
-        xp: 40
+
     },
 
     {
         id: 13,
         course: "python",
-        level: "NÍVEL 1",
         title: "return",
         description:
             "Faça funções devolverem valores.",
@@ -3172,13 +3043,12 @@ print(resultado)
             return devolve um resultado para quem chamou a função.
             </p>
         `,
-        xp: 40
+
     },
 
     {
         id: 14,
         course: "python",
-        level: "NÍVEL 1",
         title: "Dicionários",
         description:
             "Guarde informações usando chave e valor.",
@@ -3195,13 +3065,12 @@ jogador = {
 print(jogador["nome"])
             </div>
         `,
-        xp: 40
+
     },
 
     {
         id: 15,
         course: "python",
-        level: "NÍVEL 1",
         title: "Tuplas e Sets",
         description:
             "Conheça outras estruturas de dados.",
@@ -3218,13 +3087,12 @@ cores = ("vermelho", "azul", "verde")
 numeros = {1, 2, 3, 4}
             </div>
         `,
-        xp: 40
+
     },
 
     {
         id: 16,
         course: "python",
-        level: "NÍVEL 1",
         title: "try e except",
         description:
             "Aprenda a lidar com erros.",
@@ -3242,13 +3110,12 @@ except ValueError:
             Assim podemos impedir que certos erros encerrem o programa.
             </p>
         `,
-        xp: 40
+
     },
 
     {
         id: 17,
         course: "python",
-        level: "NÍVEL 1",
         title: "Arquivos",
         description:
             "Aprenda a ler e escrever arquivos.",
@@ -3264,13 +3131,12 @@ with open("dados.txt", "w") as arquivo:
             Python consegue trabalhar com arquivos do computador.
             </p>
         `,
-        xp: 40
+
     },
 
     {
         id: 18,
         course: "python",
-        level: "NÍVEL 1",
         title: "JSON",
         description:
             "Aprenda a trabalhar com dados estruturados.",
@@ -3289,13 +3155,12 @@ with open("dados.json", "w") as arquivo:
     json.dump(dados, arquivo, indent=4)
             </div>
         `,
-        xp: 40
+
     },
 
     {
         id: 19,
         course: "python",
-        level: "NÍVEL 1",
         title: "Módulos",
         description:
             "Organize seu projeto em diferentes arquivos.",
@@ -3310,13 +3175,12 @@ from jogador import Jogador
             Módulos permitem dividir um projeto grande em arquivos menores.
             </p>
         `,
-        xp: 40
+
     },
 
     {
         id: 20,
         course: "python",
-        level: "NÍVEL 1",
         title: "PROVONA — Python",
         description:
             "Teste seus conhecimentos fundamentais.",
@@ -3337,422 +3201,22 @@ from jogador import Jogador
             É sobre conseguir resolver problemas.
             </div>
         `,
-        xp: 100
+
     }
 
 ];
-
-
-/* =========================================================
-   CHALLENGES
-========================================================= */
-
-const challenges = [
-
-    {
-        title: "Primeiro programa",
-        description:
-            "Crie um programa que mostre uma mensagem na tela.",
-        difficulty: "FÁCIL",
-        xp: 25
-    },
-
-    {
-        title: "Calculadora",
-        description:
-            "Crie uma calculadora simples usando entrada do usuário.",
-        difficulty: "FÁCIL",
-        xp: 40
-    },
-
-    {
-        title: "Adivinhe o número",
-        description:
-            "Use random e loops para criar um jogo.",
-        difficulty: "MÉDIO",
-        xp: 60
-    },
-
-    {
-        title: "Sistema de login",
-        description:
-            "Crie um sistema simples de usuário e senha.",
-        difficulty: "MÉDIO",
-        xp: 80
-    },
-
-    {
-        title: "CAOS CASE",
-        description:
-            "Crie um sistema de inventário e raridades.",
-        difficulty: "DIFÍCIL",
-        xp: 120
-    },
-
-    {
-        title: "CAOS RPG",
-        description:
-            "Construa personagens, atributos e sistema de XP.",
-        difficulty: "BOSS",
-        xp: 250
-    }
-
-];
-
-
-/* =========================================================
-   ACHIEVEMENTS
-========================================================= */
-
-const achievements = [
-
-    {
-        id: "first",
-        icon: "🚀",
-        title: "Primeiro passo",
-        description: "Complete sua primeira aula.",
-        condition: state =>
-            state.completedLessons.length >= 1
-    },
-
-    {
-        id: "five",
-        icon: "🔥",
-        title: "Pegando fogo",
-        description: "Complete 5 aulas.",
-        condition: state =>
-            state.completedLessons.length >= 5
-    },
-
-    {
-        id: "ten",
-        icon: "⚡",
-        title: "Em evolução",
-        description: "Complete 10 aulas.",
-        condition: state =>
-            state.completedLessons.length >= 10
-    },
-
-    {
-        id: "python",
-        icon: "🐍",
-        title: "Python Developer",
-        description: "Complete o nível 1 de Python.",
-        condition: state =>
-            state.completedLessons.length >= 20
-    },
-
-    {
-        id: "xp100",
-        icon: "⭐",
-        title: "100 XP",
-        description: "Ganhe 100 XP.",
-        condition: state =>
-            state.xp >= 100
-    },
-
-    {
-        id: "xp500",
-        icon: "💎",
-        title: "Veterano",
-        description: "Ganhe 500 XP.",
-        condition: state =>
-            state.xp >= 500
-    },
-
-    {
-        id: "streak3",
-        icon: "🔥",
-        title: "Consistente",
-        description: "Mantenha 3 dias de streak.",
-        condition: state =>
-            state.streak >= 3
-    },
-
-    {
-        id: "challenge",
-        icon: "⚔",
-        title: "Guerreiro",
-        description: "Complete um desafio.",
-        condition: state =>
-            state.completedChallenges.length >= 1
-    }
-
-];
-
-
-/* =========================================================
-   LOCAL STORAGE
-========================================================= */
-
-const STORAGE_KEY =
-    "caos_dev_academy_v1";
-
-
-let state =
-    JSON.parse(
-        localStorage.getItem(STORAGE_KEY)
-    ) || {
-
-        name: "CAOS Developer",
-
-        xp: 0,
-
-        completedLessons: [],
-
-        completedChallenges: [],
-
-        unlockedAchievements: [],
-
-        streak: 0,
-
-        lastStudyDate: null,
-
-        animations: true
-    };
-
-
-function saveState() {
-
-    localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(state)
-    );
-
-}
-
-
-/* =========================================================
-   XP
-========================================================= */
-
-function getLevel(xp) {
-
-    return Math.floor(
-        xp / 100
-    ) + 1;
-
-}
-
-
-function getLevelXP(xp) {
-
-    return xp % 100;
-
-}
-
-
-function addXP(amount) {
-
-    const oldLevel =
-        getLevel(state.xp);
-
-    state.xp += amount;
-
-    const newLevel =
-        getLevel(state.xp);
-
-    saveState();
-
-    if (newLevel > oldLevel) {
-
-        showToast(
-            "LEVEL UP!",
-            `Você chegou ao nível ${newLevel}!`
-        );
-
-    }
-
-    updateUI();
-
-}
-
-
-/* =========================================================
-   STREAK
-========================================================= */
-
-function updateStreak() {
-
-    const today =
-        new Date().toISOString().split("T")[0];
-
-    if (!state.lastStudyDate) {
-
-        state.streak = 1;
-
-        state.lastStudyDate = today;
-
-        saveState();
-
-        return;
-
-    }
-
-
-    if (state.lastStudyDate === today) {
-        return;
-    }
-
-
-    const previous =
-        new Date(state.lastStudyDate);
-
-    const current =
-        new Date(today);
-
-    const difference =
-        Math.floor(
-            (
-                current - previous
-            ) /
-            (1000 * 60 * 60 * 24)
-        );
-
-
-    if (difference === 1) {
-
-        state.streak++;
-
-    } else {
-
-        state.streak = 1;
-
-    }
-
-
-    state.lastStudyDate = today;
-
-    saveState();
-
-}
-
-
-/* =========================================================
-   COMPLETE LESSON
-========================================================= */
-
-function completeLesson(id) {
-
-    if (
-        state.completedLessons.includes(id)
-    ) {
-
-        showToast(
-            "AULA CONCLUÍDA",
-            "Você já ganhou XP por esta aula."
-        );
-
-        return;
-
-    }
-
-
-    const lesson =
-        lessons.find(
-            item => item.id === id
-        );
-
-
-    if (!lesson) {
-        return;
-    }
-
-
-    state.completedLessons.push(id);
-
-    updateStreak();
-
-    addXP(lesson.xp);
-
-    checkAchievements();
-
-    saveState();
-
-    showToast(
-        "AULA CONCLUÍDA",
-        `+${lesson.xp} XP adicionados!`
-    );
-
-}
 
 
 /* =========================================================
    CHALLENGE
 ========================================================= */
-
 function completeChallenge(index) {
-
-    if (
-        state.completedChallenges.includes(index)
-    ) {
-
-        showToast(
-            "DESAFIO CONCLUÍDO",
-            "Você já completou este desafio."
-        );
-
-        return;
-
-    }
-
-
-    const challenge =
-        challenges[index];
-
-
-    state.completedChallenges.push(index);
-
-    updateStreak();
-
-    addXP(challenge.xp);
-
-    checkAchievements();
-
-    saveState();
-
-    showToast(
-        "DESAFIO CONCLUÍDO",
-        `+${challenge.xp} XP!`
-    );
-
+    if (state.completedChallenges.includes(index)) { showToast("DESAFIO CONCLUÍDO", "Este desafio já está registrado."); return; }
+    const challenge = challenges[index]; if (!challenge) return;
+    state.completedChallenges.push(index); updateStreak();
+    recordActivity("challenge", `Desafio concluído: ${challenge.title}`); saveState();
+    renderChallenges(); updateUI(); showToast("DESAFIO CONCLUÍDO", "Seu progresso de prática foi atualizado.");
 }
-
-
-/* =========================================================
-   ACHIEVEMENTS
-========================================================= */
-
-function checkAchievements() {
-
-    achievements.forEach(
-        achievement => {
-
-            if (
-                achievement.condition(state) &&
-                !state.unlockedAchievements.includes(
-                    achievement.id
-                )
-            ) {
-
-                state.unlockedAchievements.push(
-                    achievement.id
-                );
-
-                showToast(
-                    "NOVA CONQUISTA!",
-                    achievement.title
-                );
-
-            }
-
-        }
-    );
-
-    saveState();
-
-}
-
 
 /* =========================================================
    PAGE NAVIGATION
@@ -3821,13 +3285,8 @@ function openPage(page) {
         renderChallenges();
     }
 
-    if (page === "achievements") {
-        renderAchievements();
-    }
-
-    if (page === "progress") {
-        renderProgress();
-    }
+    if (page === "progress") { renderProgress(); }
+    if (page === "projects") { renderProjects(); }
 
 }
 
@@ -3964,423 +3423,69 @@ function renderCourses() {
 /* =========================================================
    RENDER CHALLENGES
 ========================================================= */
-
 function renderChallenges() {
-
-    const container =
-        document.getElementById(
-            "challengesContainer"
-        );
-
-
-    container.innerHTML = "";
-
-
-    challenges.forEach(
-        (challenge, index) => {
-
-            const completed =
-                state.completedChallenges.includes(
-                    index
-                );
-
-
-            const card =
-                document.createElement("div");
-
-
-            card.className =
-                "challenge-card";
-
-
-            card.innerHTML = `
-
-                <div class="challenge-top">
-
-                    <span class="difficulty">
-                        ${challenge.difficulty}
-                    </span>
-
-                    <span>
-                        ${completed ? "✓" : "⚔"}
-                    </span>
-
-                </div>
-
-                <h3>
-                    ${challenge.title}
-                </h3>
-
-                <p>
-                    ${challenge.description}
-                </p>
-
-                <div class="challenge-reward">
-
-                    <span class="challenge-xp">
-                        +${challenge.xp} XP
-                    </span>
-
-                    <button
-                        class="btn-primary"
-                        ${completed ? "disabled" : ""}
-                        onclick="completeChallenge(${index})"
-                    >
-                        ${
-                            completed
-                                ? "Concluído"
-                                : "Concluir"
-                        }
-                    </button>
-
-                </div>
-            `;
-
-
-            container.appendChild(card);
-
-        }
-    );
-
+    const container = document.getElementById("challengesContainer");
+    container.innerHTML = `<div class="challenge-toolbar"><button class="filter-chip active" data-filter="all">Todos</button><button class="filter-chip" data-filter="FÁCIL">Fácil</button><button class="filter-chip" data-filter="MÉDIO">Médio</button><button class="filter-chip" data-filter="DIFÍCIL">Difícil</button><button class="filter-chip" data-filter="BOSS">Projeto</button></div><div class="challenge-results" id="challengeResults"></div>`;
+    const results = document.getElementById("challengeResults");
+    const draw = filter => {
+        results.innerHTML = "";
+        challenges.forEach((challenge,index) => {
+            if (filter !== "all" && challenge.difficulty !== filter) return;
+            const completed = state.completedChallenges.includes(index);
+            const card = document.createElement("div"); card.className="challenge-card";
+            card.innerHTML = `<div class="challenge-top"><span class="difficulty">${challenge.difficulty}</span><span>${completed ? "✓" : "○"}</span></div><h3>${challenge.title}</h3><p>${challenge.description}</p><div class="challenge-reward"><span class="challenge-status ${completed ? "done" : ""}">${completed ? "Concluído" : "Em aberto"}</span><button class="btn-primary" ${completed ? "disabled" : ""} onclick="completeChallenge(${index})">${completed ? "Registrado" : "Marcar como concluído"}</button></div>`;
+            results.appendChild(card);
+        });
+    };
+    container.querySelectorAll(".filter-chip").forEach(btn=>btn.addEventListener("click",()=>{ container.querySelectorAll(".filter-chip").forEach(b=>b.classList.remove("active")); btn.classList.add("active"); draw(btn.dataset.filter); }));
+    draw("all");
 }
-
-
-/* =========================================================
-   RENDER ACHIEVEMENTS
-========================================================= */
-
-function renderAchievements() {
-
-    const container =
-        document.getElementById(
-            "achievementsContainer"
-        );
-
-
-    container.innerHTML = "";
-
-
-    achievements.forEach(
-        achievement => {
-
-            const unlocked =
-                state.unlockedAchievements.includes(
-                    achievement.id
-                );
-
-
-            const card =
-                document.createElement("div");
-
-
-            card.className =
-                "achievement" +
-                (
-                    unlocked
-                        ? " unlocked"
-                        : ""
-                );
-
-
-            card.innerHTML = `
-
-                <div class="achievement-icon">
-                    ${achievement.icon}
-                </div>
-
-                <h3>
-                    ${achievement.title}
-                </h3>
-
-                <p>
-                    ${achievement.description}
-                </p>
-
-            `;
-
-
-            container.appendChild(card);
-
-        }
-    );
-
-}
-
 
 /* =========================================================
    RENDER PROGRESS
 ========================================================= */
-
 function renderProgress() {
-
-    const total =
-        lessons.length;
-
-
-    const completed =
-        state.completedLessons.length;
-
-
-    const percent =
-        total
-            ? Math.round(
-                completed /
-                total *
-                100
-            )
-            : 0;
-
-
-    document.getElementById(
-        "overallProgress"
-    ).textContent =
-        `${percent}%`;
-
-
-    document.getElementById(
-        "overallProgressFill"
-    ).style.width =
-        `${percent}%`;
-
-
-    const container =
-        document.getElementById(
-            "progressCourses"
-        );
-
-
-    container.innerHTML = "";
-
-
-    courses.forEach(
-        course => {
-
-            const courseLessons =
-                lessons.filter(
-                    lesson =>
-                        lesson.course === course.id
-                );
-
-
-            const done =
-                courseLessons.filter(
-                    lesson =>
-                        state.completedLessons.includes(
-                            lesson.id
-                        )
-                ).length;
-
-
-            const coursePercent =
-                courseLessons.length
-                    ? Math.round(
-                        done /
-                        courseLessons.length *
-                        100
-                    )
-                    : 0;
-
-
-            const div =
-                document.createElement("div");
-
-
-            div.className =
-                "progress-course";
-
-
-            div.innerHTML = `
-
-                <strong>
-                    ${course.icon}
-                    ${course.title}
-                </strong>
-
-                <p style="
-                    margin-top:6px;
-                    color:#777;
-                    font-size:11px;
-                ">
-                    ${done} aulas concluídas
-                    · ${coursePercent}%
-                </p>
-
-            `;
-
-
-            container.appendChild(div);
-
-        }
-    );
-
+    const percent=getOverallProgress();
+    document.getElementById("overallProgress").textContent=`${percent}%`;
+    document.getElementById("overallProgressFill").style.width=`${percent}%`;
+    document.getElementById("progressLessonCount").textContent=`${state.completedLessons.length}/${lessons.length}`;
+    document.getElementById("progressChallengeCount").textContent=`${state.completedChallenges.length}/${challenges.length}`;
+    document.getElementById("progressProjectCount").textContent=state.projects.caosRpg.progress===100?"1/1":"0/1";
+    document.getElementById("progressReviewCount").textContent=state.reviewLessons.length;
+    const container=document.getElementById("progressCourses"); container.innerHTML="";
+    courses.forEach(course=>{ const ls=lessons.filter(l=>l.course===course.id); const done=ls.filter(l=>state.completedLessons.includes(l.id)).length; const pct=ls.length?Math.round(done/ls.length*100):0; const div=document.createElement("div"); div.className="progress-course"; div.innerHTML=`<div class="progress-course-head"><strong>${course.icon} ${course.title}</strong><span>${pct}%</span></div><div class="course-progress-bar"><div class="course-progress-fill" style="width:${pct}%"></div></div><p>${done} de ${ls.length} aulas concluídas</p>`; container.appendChild(div); });
+    renderActivity();
 }
-
+function renderActivity(){ const list=document.getElementById("activityList"); if(!list)return; const items=state.activity||[]; list.innerHTML=items.length?items.map(item=>`<div class="activity-item"><span class="activity-dot"></span><div><strong>${item.text}</strong><small>${new Date(item.date).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}</small></div></div>`).join(""):`<div class="empty-state"><strong>Nenhuma atividade ainda</strong><p>Conclua uma aula ou desafio para começar seu histórico.</p></div>`; }
+function renderProjects(){ const c=document.getElementById("projectsContainer"); if(!c)return; const p=state.projects.caosRpg; const steps=["Planejar personagens e atributos","Criar estruturas de dados","Implementar regras do jogo","Organizar o projeto em módulos"]; c.innerHTML=`<div class="project-card"><div class="project-card-top"><span class="project-tag">PYTHON</span><span>${p.status}</span></div><h2>CAOS RPG</h2><p>Projeto guiado para aplicar variáveis, condições, loops, funções, estruturas de dados e organização de código.</p><div class="project-progress"><div class="course-progress-top"><span>Progresso</span><strong>${p.progress}%</strong></div><div class="course-progress-bar"><div class="course-progress-fill" style="width:${p.progress}%"></div></div></div><div class="project-checklist">${steps.map((text,i)=>`<label><input type="checkbox" data-project-step="${i}" ${p.progress >= (i+1)*25 ? "checked" : ""}><span>${text}</span></label>`).join("")}</div></div>`; c.querySelectorAll("input[data-project-step]").forEach(input=>input.addEventListener("change",()=>{ const checked=[...c.querySelectorAll("input[data-project-step]")].filter(x=>x.checked).length; p.progress=checked*25; p.status=p.progress===100?"Concluído":"Em desenvolvimento"; recordActivity("project",`CAOS RPG: ${p.progress}% concluído`); renderProjects(); updateUI(); })); }
 
 /* =========================================================
    UPDATE UI
 ========================================================= */
-
-function updateUI() {
-
-    const level =
-        getLevel(state.xp);
-
-
-    const levelXP =
-        getLevelXP(state.xp);
-
-
-    const percent =
-        levelXP;
-
-
-    document.getElementById(
-        "headerXP"
-    ).textContent =
-        state.xp;
-
-
-    document.getElementById(
-        "headerLevel"
-    ).textContent =
-        level;
-
-
-    document.getElementById(
-        "dashboardXP"
-    ).textContent =
-        state.xp;
-
-
-    document.getElementById(
-        "dashboardLevel"
-    ).textContent =
-        level;
-
-
-    document.getElementById(
-        "xpFill"
-    ).style.width =
-        `${percent}%`;
-
-
-    document.getElementById(
-        "xpProgressText"
-    ).textContent =
-        `${levelXP} / 100 XP`;
-
-
-    document.getElementById(
-        "playerName"
-    ).textContent =
-        state.name;
-
-
-    document.getElementById(
-        "nameInput"
-    ).value =
-        state.name;
-
-
-    document.getElementById(
-        "lessonsCompleted"
-    ).textContent =
-        state.completedLessons.length;
-
-
-    document.getElementById(
-        "challengesCompleted"
-    ).textContent =
-        state.completedChallenges.length;
-
-
-    document.getElementById(
-        "achievementsUnlocked"
-    ).textContent =
-        state.unlockedAchievements.length;
-
-
-    document.getElementById(
-        "currentStreak"
-    ).textContent =
-        state.streak;
-
-
-    const titles = [
-
-        "Iniciante",
-
-        "Aprendiz",
-
-        "Programador",
-
-        "Developer",
-
-        "Software Developer",
-
-        "Senior Developer",
-
-        "Elite Developer",
-
-        "CAOS Master"
-
-    ];
-
-
-    document.getElementById(
-        "playerTitle"
-    ).textContent =
-        titles[
-            Math.min(
-                level - 1,
-                titles.length - 1
-            )
-        ];
-
-
-    const next =
-        lessons.find(
-            lesson =>
-                !state.completedLessons.includes(
-                    lesson.id
-                )
-        );
-
-
-    document.getElementById(
-        "continueLesson"
-    ).textContent =
-        next
-            ? `Próxima aula: ${next.title}`
-            : "Você concluiu todas as aulas disponíveis!";
-
-
-    document.getElementById(
-        "continueButton"
-    ).textContent =
-        next
-            ? "Continuar"
-            : "Concluído";
-
-
-    document.getElementById(
-        "animationsToggle"
-    ).checked =
-        state.animations;
-
-
-    renderCourses();
-
-    renderAchievements();
-
+function updateUI(){
+    const percent=getOverallProgress(), completed=state.completedLessons.length, next=lessons.find(l=>!state.completedLessons.includes(l.id));
+    document.getElementById("headerProgress").textContent=`${percent}%`;
+    document.getElementById("headerLessons").textContent=`${completed}/${lessons.length}`;
+    document.getElementById("dashboardProgress").textContent=`${percent}%`;
+    document.getElementById("progressFill").style.width=`${percent}%`;
+    document.getElementById("progressProgressText").textContent=`${completed} de ${lessons.length} aulas concluídas`;
+    document.getElementById("playerName").textContent=state.name; document.getElementById("nameInput").value=state.name;
+    document.getElementById("lessonsCompleted").textContent=completed; document.getElementById("challengesCompleted").textContent=state.completedChallenges.length;
+    document.getElementById("projectsCompleted").textContent=state.projects.caosRpg.progress===100?1:0; document.getElementById("reviewLessons").textContent=state.reviewLessons.length;
+    document.getElementById("playerTitle").textContent=percent===0?"Começando a jornada":percent<50?"Em desenvolvimento":percent<100?"Construindo conhecimento":"Fundamentos concluídos";
+    document.getElementById("continueLesson").textContent=next?`Próxima aula: ${next.title}`:"Você concluiu todas as aulas disponíveis!"; document.getElementById("continueButton").textContent=next?"Continuar":"Concluído";
+    document.getElementById("nextStepTitle").textContent=next?next.title:"Escolha um desafio ou projeto"; document.getElementById("nextStepText").textContent=next?next.description:"Continue praticando para consolidar seus fundamentos.";
+    document.getElementById("animationsToggle").checked=state.animations; renderCourses();
+    if(document.getElementById("page-progress").classList.contains("active"))renderProgress();
 }
-
 
 /* =========================================================
    LESSON MODAL
 ========================================================= */
 
 function openLesson(id) {
+
+    state.lastLessonId=id; saveState();
 
     const lesson =
         lessons.find(
@@ -4416,7 +3521,7 @@ function openLesson(id) {
         <div class="lesson-header">
 
             <span>
-                PYTHON · ${lesson.level}
+                PYTHON · FUNDAMENTOS
             </span>
 
             <h2>
@@ -4444,12 +3549,8 @@ function openLesson(id) {
         ${
             completed
                 ? `
-                    <button
-                        class="btn-secondary lesson-complete"
-                        disabled
-                    >
-                        ✓ Aula já concluída
-                    </button>
+                    <button class="btn-secondary lesson-complete" disabled>✓ Aula já concluída</button>
+                    <button class="btn-secondary lesson-review" onclick="toggleReviewLesson(${lesson.id})">${state.reviewLessons.includes(lesson.id) ? "↻ Remover da revisão" : "↻ Marcar para revisão"}</button>
                 `
                 : `
                     <button
@@ -4457,7 +3558,7 @@ function openLesson(id) {
                         onclick="finishLesson(${lesson.id})"
                     >
                         ✓ Marcar aula como concluída
-                        · +${lesson.xp} XP
+                       
                     </button>
                 `
         }
@@ -4811,6 +3912,9 @@ document
     );
 
 
+/* Next step */
+document.getElementById("nextStepButton").addEventListener("click",()=>{ const next=lessons.find(l=>!state.completedLessons.includes(l.id)); if(next)openLesson(next.id); else openPage("projects"); });
+
 /* Name */
 
 document
@@ -4961,7 +4065,6 @@ document
 
 updateStreak();
 
-checkAchievements();
 
 updateUI();
 
@@ -4971,4 +4074,3 @@ renderCourses();
 
 </body>
 </html>
-```
