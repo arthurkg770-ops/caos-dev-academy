@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CAOS DEV ACADEMY</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #080808;
+            color: #f2f2f2;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            height: 70px;
+            padding: 0 35px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: #0d0d0d;
+            border-bottom: 1px solid #242424;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #b30000;
+        }
+
+        .logo span {
+            color: #ffffff;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: #aaa;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        nav a:hover {
+            color: #b30000;
+        }
+
+        .hero {
+            min-height: 600px;
+            padding: 100px 8%;
+
+            display: flex;
+            align-items: center;
+
+            background:
+                radial-gradient(circle at 80% 30%, #350000 0%, transparent 35%),
+                #080808;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .tag {
+            color: #b30000;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 70px;
+            line-height: 1;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #b30000;
+        }
+
+        .hero p {
+            color: #aaa;
+            font-size: 19px;
+            line-height: 1.7;
+            max-width: 700px;
+            margin-bottom: 35px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 25px;
+
+            border: none;
+            border-radius: 6px;
+
+            background: #b30000;
+            color: white;
+
+            font-weight: bold;
+            text-decoration: none;
+
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #d00000;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid #444;
+            margin-left: 10px;
+        }
+
+        .btn-secondary:hover {
+            background: #151515;
+            border-color: #b30000;
+        }
+
+        section {
+            padding: 80px 8%;
+        }
+
+        .section-title {
+            margin-bottom: 40px;
+        }
+
+        .section-title small {
+            color: #b30000;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .section-title h2 {
+            font-size: 38px;
+            margin-top: 8px;
+        }
+
+        .dashboard {
+            background: #0d0d0d;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .stat {
+            background: #121212;
+            border: 1px solid #242424;
+            border-radius: 10px;
+            padding: 25px;
+        }
+
+        .stat-title {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .stat-value {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .red {
+            color: #b30000;
+        }
+
+        .progress-container {
+            margin-top: 30px;
+            background: #121212;
+            border: 1px solid #242424;
+            border-radius: 10px;
+            padding: 25px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #242424;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 18%;
+            height: 100%;
+            background: #b30000;
+            transition: width 0.5s;
+        }
+
+        .courses {
+            background: #080808;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .course {
+            background: #111;
+            border: 1px solid #242424;
+            border-radius: 10px;
+            padding: 25px;
+            transition: 0.25s;
+        }
+
+        .course:hover {
+            transform: translateY(-5px);
+            border-color: #700000;
+        }
+
+        .course-number {
+            color: #b30000;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .course h3 {
+            font-size: 23px;
+            margin-bottom: 12px;
+        }
+
+        .course p {
+            color: #888;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .locked {
+            opacity: 0.45;
+        }
+
+        .lesson-section {
+            background: #0d0d0d;
+        }
+
+        .lesson-container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .lesson {
+            display: none;
+            background: #111;
+            border: 1px solid #292929;
+            border-radius: 10px;
+            padding: 35px;
+        }
+
+        .lesson.active {
+            display: block;
+        }
+
+        .lesson-number {
+            color: #b30000;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .lesson h3 {
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        .lesson p {
+            color: #bbb;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        pre {
+            background: #050505;
+            border: 1px solid #252525;
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        code {
+            color: #ddd;
+            font-family: Consolas, monospace;
+        }
+
+        .exercise {
+            margin-top: 30px;
+            padding: 25px;
+            background: #0b0b0b;
+            border-left: 3px solid #b30000;
+            border-radius: 5px;
+        }
+
+        .exercise h4 {
+            margin-bottom: 12px;
+        }
+
+        .exercise input {
+            width: 100%;
+            padding: 13px;
+            margin: 15px 0;
+
+            background: #151515;
+            border: 1px solid #333;
+            border-radius: 5px;
+
+            color: white;
+            outline: none;
+        }
+
+        .exercise input:focus {
+            border-color: #b30000;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .achievements {
+            background: #080808;
+        }
+
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .achievement {
+            background: #111;
+            border: 1px solid #242424;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .achievement .icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .achievement h3 {
+            margin-bottom: 8px;
+        }
+
+        .achievement p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        footer {
+            padding: 35px 8%;
+            background: #050505;
+            border-top: 1px solid #202020;
+
+            display: flex;
+            justify-content: space-between;
+
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* RESPONSIVO */
+
+        @media (max-width: 1000px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .course-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .achievement-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 55px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            header {
+                padding: 0 18px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero {
+                padding: 80px 25px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            section {
+                padding: 60px 25px;
+            }
+
+            .stats,
+            .course-grid,
+            .achievement-grid {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn-secondary {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        CAOS <span>DEV ACADEMY</span>
+    </div>
+
+    <nav>
+        <a href="#inicio">Início</a>
+        <a href="#painel">Painel</a>
+        <a href="#cursos">Cursos</a>
+        <a href="#aulas">Aulas</a>
+        <a href="#conquistas">Conquistas</a>
+    </nav>
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero" id="inicio">
+
+    <div class="hero-content">
+
+        <div class="tag">
+            CAOS DEV ACADEMY
+        </div>
+
+        <h1>
+            APRENDA.<br>
+            <span>CONSTRUA.</span><br>
+            EVOLUA.
+        </h1>
+
+        <p>
+            Sua plataforma pessoal para aprender programação,
+            desenvolvimento, sistemas, redes, CyberSecurity e muito mais.
+        </p>
+
+        <a href="#cursos" class="btn">
+            COMEÇAR A ESTUDAR
+        </a>
+
+        <a href="#painel" class="btn btn-secondary">
+            VER MEU PROGRESSO
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- DASHBOARD -->
+
+<section class="dashboard" id="painel">
+
+    <div class="section-title">
+        <small>SEU DESEMPENHO</small>
+        <h2>Painel</h2>
+    </div>
+
+    <div class="stats">
+
+        <div class="stat">
+            <div class="stat-title">NÍVEL</div>
+            <div class="stat-value red" id="level">
+                1
+            </div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-title">XP</div>
+            <div class="stat-value">
+                <span id="xp">0</span>
+            </div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-title">AULAS CONCLUÍDAS</div>
+            <div class="stat-value">
+                <span id="lessonsDone">0</span>
+            </div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-title">DESAFIOS</div>
+            <div class="stat-value">
+                <span id="challengesDone">0</span>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="progress-container">
+
+        <div class="progress-header">
+            <strong>Progresso da Academy</strong>
+
+            <span id="progressText">
+                0%
+            </span>
+        </div>
+
+        <div class="progress-bar">
+            <div
+                class="progress-fill"
+                id="progressFill"
+                style="width: 0%;">
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CURSOS -->
+
+<section class="courses" id="cursos">
+
+    <div class="section-title">
+        <small>TRILHA DE APRENDIZADO</small>
+        <h2>Cursos</h2>
+    </div>
+
+
+    <div class="course-grid">
+
+        <div class="course">
+
+            <div class="course-number">
+                NÍVEL 01
+            </div>
+
+            <h3>🐍 Python</h3>
+
+            <p>
+                Fundamentos da programação, lógica, funções,
+                listas, dicionários e muito mais.
+            </p>
+
+            <button
+                class="btn"
+                onclick="abrirAula(1)">
+                ESTUDAR
+            </button>
+
+        </div>
+
+
+        <div class="course">
+
+            <div class="course-number">
+                NÍVEL 02
+            </div>
+
+            <h3>🧱 POO</h3>
+
+            <p>
+                Classes, objetos, métodos, encapsulamento,
+                herança e polimorfismo.
+            </p>
+
+            <button
+                class="btn"
+                onclick="abrirAula(2)">
+                ESTUDAR
+            </button>
+
+        </div>
+
+
+        <div class="course">
+
+            <div class="course-number">
+                NÍVEL 03
+            </div>
+
+            <h3>💻 Desenvolvimento</h3>
+
+            <p>
+                Organização de projetos, código profissional,
+                Git e ferramentas de desenvolvimento.
+            </p>
+
+            <button
+                class="btn"
+                onclick="abrirAula(3)">
+                ESTUDAR
+            </button>
+
+        </div>
+
+
+        <div class="course">
+
+            <div class="course-number">
+                NÍVEL 04
+            </div>
+
+            <h3>🌐 Web</h3>
+
+            <p>
+                HTML, CSS, JavaScript, páginas,
+                interfaces e aplicações web.
+            </p>
+
+            <button
+                class="btn"
+                onclick="abrirAula(4)">
+                ESTUDAR
+            </button>
+
+        </div>
+
+
+        <div class="course">
+
+            <div class="course-number">
+                NÍVEL 05
+            </div>
+
+            <h3>🗄️ Database</h3>
+
+            <p>
+                SQL, bancos de dados, tabelas,
+                relacionamentos e persistência.
+            </p>
+
+            <button
+                class="btn"
+                onclick="abrirAula(5)">
+                ESTUDAR
+            </button>
+
+        </div>
+
+
+        <div class="course">
+
+            <div class="course-number">
+                NÍVEL 06
+            </div>
+
+            <h3>🐧 Linux</h3>
+
+            <p>
+                Terminal, arquivos, processos,
+                permissões e servidores.
+            </p>
+
+            <button
+                class="btn"
+                onclick="abrirAula(6)">
+                ESTUDAR
+            </button>
+
+        </div>
+
+
+        <div class="course">
+
+            <div class="course-number">
+                NÍVEL 07
+            </div>
+
+            <h3>🌐 Redes</h3>
+
+            <p>
+                IP, DNS, HTTP, TCP, UDP, portas,
+                protocolos e infraestrutura.
+            </p>
+
+            <button
+                class="btn"
+                onclick="abrirAula(7)">
+                ESTUDAR
+            </button>
+
+        </div>
+
+
+        <div class="course">
+
+            <div class="course-number">
+                NÍVEL 08
+            </div>
+
+            <h3>🔐 CyberSecurity</h3>
+
+            <p>
+                Segurança, defesa, vulnerabilidades
+                e fundamentos de segurança digital.
+            </p>
+
+            <button
+                class="btn"
+                onclick="abrirAula(8)">
+                ESTUDAR
+            </button>
+
+        </div>
+
+
+        <div class="course">
+
+            <div class="course-number">
+                NÍVEL 09
+            </div>
+
+            <h3>🥷 Ethical Hacking</h3>
+
+            <p>
+                Pentest e segurança ofensiva
+                em ambientes autorizados.
+            </p>
+
+            <button
+                class="btn"
+                onclick="abrirAula(9)">
+                ESTUDAR
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- AULAS -->
+
+<section class="lesson-section" id="aulas">
+
+    <div class="section-title">
+        <small>ACADEMY LAB</small>
+        <h2>Aulas</h2>
+    </div>
+
+
+    <div class="lesson-container">
+
+
+        <!-- AULA 1 -->
+
+        <div class="lesson active" id="lesson1">
+
+            <div class="lesson-number">
+                PYTHON — AULA 01
+            </div>
+
+            <h3>Variáveis</h3>
+
+            <p>
+                Uma variável é como uma pequena caixa onde
+                podemos guardar uma informação.
+            </p>
+
+            <pre><code>nome = "Arthur"
+idade = 13
+xp = 100
+
+print(nome)
+print(idade)
+print(xp)</code></pre>
+
+            <p>
+                O símbolo <strong>=</strong> serve para colocar
+                um valor dentro da variável.
+            </p>
+
+
+            <div class="exercise">
+
+                <h4>🎯 Desafio</h4>
+
+                <p>
+                    Qual comando usamos em Python para mostrar
+                    uma informação na tela?
+                </p>
+
+                <input
+                    type="text"
+                    id="answer1"
+                    placeholder="Digite sua resposta...">
+
+                <button
+                    class="btn"
+                    onclick="responder(1, 'print')">
+                    RESPONDER
+                </button>
+
+                <div id="result1"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- AULA 2 -->
+
+        <div class="lesson" id="lesson2">
+
+            <div class="lesson-number">
+                PYTHON POO — AULA 01
+            </div>
+
+            <h3>Classes e Objetos</h3>
+
+            <p>
+                Uma classe funciona como um molde.
+                Os objetos são criados a partir desse molde.
+            </p>
+
+            <pre><code>class Jogador:
+
+    def __init__(self, nome):
+        self.nome = nome
+        self.vida = 100
+
+
+jogador = Jogador("Arthur")
+
+print(jogador.nome)
+print(jogador.vida)</code></pre>
+
+            <p>
+                A classe define como o objeto será.
+                O objeto é uma instância dessa classe.
+            </p>
+
+
+            <div class="exercise">
+
+                <h4>🎯 Desafio</h4>
+
+                <p>
+                    Qual palavra usamos para criar uma classe
+                    em Python?
+                </p>
+
+                <input
+                    type="text"
+                    id="answer2"
+                    placeholder="Digite sua resposta...">
+
+                <button
+                    class="btn"
+                    onclick="responder(2, 'class')">
+                    RESPONDER
+                </button>
+
+                <div id="result2"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- AULA 3 -->
+
+        <div class="lesson" id="lesson3">
+
+            <div class="lesson-number">
+                DESENVOLVIMENTO — AULA 01
+            </div>
+
+            <h3>O que é um projeto?</h3>
+
+            <p>
+                Um projeto é um conjunto organizado de arquivos,
+                código e recursos que trabalham juntos para
+                resolver um problema ou criar alguma aplicação.
+            </p>
+
+            <pre><code>meu_projeto/
+│
+├── main.py
+├── README.md
+└── src/
+    └── app.py</code></pre>
+
+        </div>
+
+
+        <!-- AULA 4 -->
+
+        <div class="lesson" id="lesson4">
+
+            <div class="lesson-number">
+                WEB — AULA 01
+            </div>
+
+            <h3>HTML</h3>
+
+            <p>
+                HTML é usado para estruturar uma página web.
+            </p>
+
+            <pre><code>&lt;h1&gt;CAOS DEV ACADEMY&lt;/h1&gt;
+
+&lt;p&gt;
+    Aprendendo programação.
+&lt;/p&gt;
+
+&lt;button&gt;
+    Começar
+&lt;/button&gt;</code></pre>
+
+        </div>
+
+
+        <!-- AULA 5 -->
+
+        <div class="lesson" id="lesson5">
+
+            <div class="lesson-number">
+                DATABASE — AULA 01
+            </div>
+
+            <h3>Banco de dados</h3>
+
+            <p>
+                Um banco de dados permite armazenar informações
+                para que possam ser utilizadas posteriormente.
+            </p>
+
+            <pre><code>CREATE TABLE jogadores (
+    id INTEGER,
+    nome TEXT,
+    xp INTEGER
+);</code></pre>
+
+        </div>
+
+
+        <!-- AULA 6 -->
+
+        <div class="lesson" id="lesson6">
+
+            <div class="lesson-number">
+                LINUX — AULA 01
+            </div>
+
+            <h3>Terminal</h3>
+
+            <p>
+                No Linux, podemos controlar o sistema usando
+                comandos através do terminal.
+            </p>
+
+            <pre><code>pwd
+ls
+cd pasta
+mkdir projeto</code></pre>
+
+        </div>
+
+
+        <!-- AULA 7 -->
+
+        <div class="lesson" id="lesson7">
+
+            <div class="lesson-number">
+                REDES — AULA 01
+            </div>
+
+            <h3>O que é IP?</h3>
+
+            <p>
+                Um endereço IP identifica um dispositivo
+                dentro de uma rede.
+            </p>
+
+            <pre><code>192.168.1.10</code></pre>
+
+        </div>
+
+
+        <!-- AULA 8 -->
+
+        <div class="lesson" id="lesson8">
+
+            <div class="lesson-number">
+                CYBERSECURITY — AULA 01
+            </div>
+
+            <h3>O que é segurança?</h3>
+
+            <p>
+                CyberSecurity envolve proteger sistemas,
+                redes, aplicações e dados contra acessos
+                e ações não autorizadas.
+            </p>
+
+        </div>
+
+
+        <!-- AULA 9 -->
+
+        <div class="lesson" id="lesson9">
+
+            <div class="lesson-number">
+                ETHICAL HACKING — AULA 01
+            </div>
+
+            <h3>Pentest</h3>
+
+            <p>
+                Pentest é o processo autorizado de procurar
+                vulnerabilidades em sistemas para ajudar
+                a corrigi-las.
+            </p>
+
+            <p>
+                Todos os testes devem ser realizados apenas
+                em sistemas próprios ou com autorização.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- CONQUISTAS -->
+
+<section class="achievements" id="conquistas">
+
+    <div class="section-title">
+        <small>EVOLUÇÃO</small>
+        <h2>Conquistas</h2>
+    </div>
+
+
+    <div class="achievement-grid">
+
+        <div class="achievement">
+
+            <div class="icon">🐍</div>
+
+            <h3>Primeiro Código</h3>
+
+            <p>
+                Execute seu primeiro código Python.
+            </p>
+
+        </div>
+
+
+        <div class="achievement">
+
+            <div class="icon">🧠</div>
+
+            <h3>Primeira Aula</h3>
+
+            <p>
+                Complete sua primeira aula.
+            </p>
+
+        </div>
+
+
+        <div class="achievement">
+
+            <div class="icon">🔥</div>
+
+            <h3>100 XP</h3>
+
+            <p>
+                Alcance 100 pontos de experiência.
+            </p>
+
+        </div>
+
+
+        <div class="achievement">
+
+            <div class="icon">👑</div>
+
+            <h3>CAOS DEV</h3>
+
+            <p>
+                Complete uma grande etapa da Academy.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <span>
+        CAOS DEV ACADEMY
+    </span>
+
+    <span>
+        Seu laboratório. Sua evolução.
+    </span>
+
+</footer>
+
+
+<script>
+
+    /*
+    ==========================================
+            SISTEMA DA CAOS DEV ACADEMY
+    ==========================================
+    */
+
+    let xp = Number(localStorage.getItem("caos_xp")) || 0;
+
+    let lessonsDone =
+        Number(localStorage.getItem("caos_lessons")) || 0;
+
+    let challengesDone =
+        Number(localStorage.getItem("caos_challenges")) || 0;
+
+
+    function atualizarDashboard() {
+
+        document.getElementById("xp").textContent = xp;
+
+        document.getElementById("lessonsDone").textContent =
+            lessonsDone;
+
+        document.getElementById("challengesDone").textContent =
+            challengesDone;
+
+
+        let level = Math.floor(xp / 100) + 1;
+
+        document.getElementById("level").textContent =
+            level;
+
+
+        let totalAulas = 9;
+
+        let progresso =
+            Math.min((lessonsDone / totalAulas) * 100, 100);
+
+
+        document.getElementById("progressFill").style.width =
+            progresso + "%";
+
+
+        document.getElementById("progressText").textContent =
+            Math.floor(progresso) + "%";
+    }
+
+
+    function ganharXP(valor) {
+
+        xp += valor;
+
+        localStorage.setItem(
+            "caos_xp",
+            xp
+        );
+
+        atualizarDashboard();
+    }
+
+
+    function abrirAula(numero) {
+
+        document.querySelectorAll(".lesson")
+            .forEach(function(lesson) {
+
+                lesson.classList.remove("active");
+
+            });
+
+
+        const aula =
+            document.getElementById(
+                "lesson" + numero
+            );
+
+
+        if (aula) {
+
+            aula.classList.add("active");
+
+            document.getElementById("aulas")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        }
+
+    }
+
+
+    function responder(numero, respostaCorreta) {
+
+        const input =
+            document.getElementById(
+                "answer" + numero
+            );
+
+
+        const resultado =
+            document.getElementById(
+                "result" + numero
+            );
+
+
+        const resposta =
+            input.value.trim().toLowerCase();
+
+
+        if (resposta === respostaCorreta) {
+
+            resultado.textContent =
+                "🔥 CORRETO! +40 XP";
+
+
+            resultado.style.color =
+                "#00c853";
+
+
+            const chave =
+                "caos_challenge_" + numero;
+
+
+            const jaCompletou =
+                localStorage.getItem(chave);
+
+
+            if (!jaCompletou) {
+
+                ganharXP(40);
+
+                challengesDone++;
+
+                lessonsDone++;
+
+
+                localStorage.setItem(
+                    "caos_challenges",
+                    challengesDone
+                );
+
+
+                localStorage.setItem(
+                    "caos_lessons",
+                    lessonsDone
+                );
+
+
+                localStorage.setItem(
+                    chave,
+                    "true"
+                );
+
+
+                atualizarDashboard();
+
+            }
+
+        } else {
+
+            resultado.textContent =
+                "❌ INCORRETO. Tente novamente.";
+
+
+            resultado.style.color =
+                "#b30000";
+
+        }
+
+    }
+
+
+    atualizarDashboard();
+
+</script>
+
+</body>
+</html>
