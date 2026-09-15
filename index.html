@@ -1942,6 +1942,64 @@ html,body{overflow-x:hidden}
   .academy-card,.project-card{width:100% !important;max-width:none !important}
 }
 
+
+/* ===== CAOS FINAL LAYOUT PATCH — prevent stretched Academy/Project cards ===== */
+.course-roadmap,
+.courses-grid {
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit, minmax(300px, 360px)) !important;
+  gap:20px !important;
+  justify-content:start !important;
+  align-items:start !important;
+}
+.course-roadmap > .academy-card,
+.courses-grid > .academy-card {
+  width:100% !important;
+  max-width:360px !important;
+  min-width:0 !important;
+  height:auto !important;
+  min-height:0 !important;
+  align-self:start !important;
+  justify-self:start !important;
+  box-sizing:border-box !important;
+}
+.academy-card .academy-topics {
+  flex:none !important;
+}
+.project-grid {
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit, minmax(340px, 420px)) !important;
+  gap:20px !important;
+  justify-content:start !important;
+  align-items:start !important;
+}
+.project-grid > .project-card {
+  width:100% !important;
+  max-width:420px !important;
+  min-width:0 !important;
+  height:auto !important;
+  min-height:0 !important;
+  align-self:start !important;
+  justify-self:start !important;
+  box-sizing:border-box !important;
+}
+.project-checklist { flex:none !important; }
+@media (max-width:760px) {
+  .course-roadmap,
+  .courses-grid,
+  .project-grid {
+    grid-template-columns:minmax(0, 1fr) !important;
+    justify-content:stretch !important;
+  }
+  .course-roadmap > .academy-card,
+  .courses-grid > .academy-card,
+  .project-grid > .project-card {
+    width:100% !important;
+    max-width:none !important;
+    justify-self:stretch !important;
+  }
+}
+
 </style>
 </head>
 
